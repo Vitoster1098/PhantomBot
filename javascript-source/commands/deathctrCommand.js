@@ -146,7 +146,7 @@
         $.registerChatSubcommand('deathctr', 'sub', 2);
         $.registerChatSubcommand('deathctr', 'decr', 2);
         $.registerChatSubcommand('deathctr', '-', 2);
-
+        //call the function to update deaths every 10 seconds
         setInterval(function() {
             deathUpdateFile(($.getGame($.channelName) != '' ? $.getGame($.channelName) : 'Some Game'));
         }, 10000);
