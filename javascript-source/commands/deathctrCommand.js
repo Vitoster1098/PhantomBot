@@ -27,6 +27,8 @@
      *
      * @param {String} game
      */
+    /*Function for updating the number of deaths in the built-in mini-games, that is, the game is determined, 
+    if there is no necessary directory or file, then they are created*/
     function deathUpdateFile(game) {
         var deathFile = './addons/deathctr/deathctr.txt',
             deathCounter = parseInt($.inidb.get('deaths', game));
@@ -37,13 +39,14 @@
         if (isNaN(deathCounter)) {
             deathCounter = 0;
         }
-
+        //write to the change file
         $.writeToFile(deathCounter.toFixed(0), deathFile, false);
     }
 
     /*
      * @event command
      */
+    //command handler
     $.bind('command', function(event) {
         var sender = event.getSender(),
             command = event.getCommand(),
@@ -54,6 +57,10 @@
         /*
          * @commandpath deathctr - Display the current number of deaths in game being played.
          */
+        // processing the 'deathctr' command
+        /*the game is read first, then whether a certain nickname had deaths.
+          Next, one of the available actions is performed with the number of deaths (reset, increase by a certain number,
+          incrementing, decrementing by a certain number, decrementing)*/
         if (command.equalsIgnoreCase('deathctr')) {
             var deathCounter = parseInt($.inidb.get('deaths', game));
             var noDeathExists = isNaN(parseInt(deathCounter)) || parseInt(deathCounter) === 0 ? (deathCounter = 0, true) : (false);
@@ -126,6 +133,8 @@
     /*
      * @event initReady
      */
+    /*Processing initialization commands, this file is indicated and how many commands will be available.
+      And the above commands are available (reset, set, incr, add, +, sub, decr, -)*/
     $.bind('initReady', function() {
         $.registerChatCommand('./commands/deathctrCommand.js', 'deathctr', 7);
 
