@@ -47,6 +47,8 @@
      * @event command
      */
     //command handler
+    /*This module is responsible for handling events, namely: reads the type of command, 
+    the transmitted arguments, the type of action and the name of the game*/
     $.bind('command', function(event) {
         var sender = event.getSender(),
             command = event.getCommand(),
